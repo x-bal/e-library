@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 
 class Log extends CI_Model
 {
@@ -32,5 +33,17 @@ class Log extends CI_Model
     {
         $this->db->delete('log_library', ['id_log' => $id]);
         return $this->db->affected_rows();
+    }
+
+    public function today()
+    {
+        $today = date('Y-m-d');
+        return $this->db->query("SELECT * FROM log_library WHERE DATE(waktu) = '$today'")->result();
+    }
+
+    public function month()
+    {
+        $month = date('m');
+        return $this->db->query("SELECT * FROM log_library WHERE MONTH(waktu) = '$month'")->result();
     }
 }

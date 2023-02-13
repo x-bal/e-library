@@ -13,104 +13,73 @@ class ApiController extends CI_Controller
 
     public function tapin()
     {
-        $iddev = $this->input->get('iddev', true);
+        $iddev = $this->input->get('id_device', true);
         $rfid = $this->input->get('rfid', true);
+        $secretkey = $this->input->get('secret_key', true);
 
-        if (isset($iddev) && isset($rfid)) {
-            $device = $this->Device->find($iddev);
+        if (isset($secretkey) && isset($iddev) && isset($rfid)) {
+            $key = $this->db->get_where('settings', ['name' => 'secret_key'])->row();
 
-            if (isset($device)) {
-                $siswa = $this->Siswa->where(['rfid' => $rfid]);
+            if ($key->value == $secretkey) {
 
-                if (isset($siswa)) {
-                    $data = [
-                        'device_id' => $device->id,
-                        'siswa_id' => $siswa->id,
-                        'waktu' => date('Y-m-d H:i:s'),
-                        'keterangan' => $device->use_for
-                    ];
+                $device = $this->Device->find($iddev);
 
-                    $create = $this->Log->create($data);
+                if (isset($device)) {
 
-                    if ($create > 0) {
-                        echo json_encode([
-                            'status' => 'success',
-                            'message' => 'Berhasil tap masuk'
-                        ], 200);
+                    if ($device->status == 1) {
+                        $siswa = $this->Siswa->where(['rfid' => $rfid]);
+
+                        if (isset($siswa)) {
+                            $data = [
+                                'device_id' => $device->id_device,
+                                'siswa_id' => $siswa->id_student,
+                                'waktu' => date('Y-m-d H:i:s'),
+                                'keterangan' => $device->use_for
+                            ];
+
+                            $create = $this->Log->create($data);
+
+                            if ($create > 0) {
+                                echo json_encode([
+                                    'status' => 'success',
+                                    'ket' => 'Berhasil tap ' . strtolower($device->use_for),
+                                    'siswa' => $siswa,
+                                    'waktu' => date('Y-m-d H:i:s'),
+                                ], 200);
+                            } else {
+                                echo json_encode([
+                                    'status' => 'error',
+                                    'ket' => 'Gagal tap masuk'
+                                ], 500);
+                            }
+                        } else {
+                            echo json_encode([
+                                'status' => 'error',
+                                'ket' => 'Siswa tidak terdaftar'
+                            ], 500);
+                        }
                     } else {
                         echo json_encode([
                             'status' => 'error',
-                            'message' => 'Gagal tap masuk'
+                            'ket' => 'Device nonaktif'
                         ], 500);
                     }
                 } else {
                     echo json_encode([
                         'status' => 'error',
-                        'message' => 'Siswa tidak terdaftar'
+                        'ket' => 'Device tidak terdaftar'
                     ], 500);
                 }
             } else {
                 echo json_encode([
                     'status' => 'error',
-                    'message' => 'Device tidak terdaftar'
+                    'ket' => 'Salah secret key'
                 ], 500);
             }
         } else {
             echo json_encode([
                 'status' => 'error',
-                'message' => 'Salah parameter'
-            ], 500);
-        }
-    }
-
-    public function tapout()
-    {
-        $iddev = $this->input->get('iddev', true);
-        $rfid = $this->input->get('rfid', true);
-
-        if (isset($iddev) && isset($rfid)) {
-            $device = $this->Device->find($iddev);
-
-            if (isset($device)) {
-                $siswa = $this->Siswa->where(['rfid' => $rfid]);
-
-                if (isset($siswa)) {
-                    $data = [
-                        'device_id' => $device->id,
-                        'siswa_id' => $siswa->id,
-                        'waktu' => date('Y-m-d H:i:s'),
-                        'keterangan' => $device->use_for
-                    ];
-
-                    $create = $this->Log->create($data);
-
-                    if ($create > 0) {
-                        echo json_encode([
-                            'status' => 'success',
-                            'message' => 'Berhasil tap keluar'
-                        ], 200);
-                    } else {
-                        echo json_encode([
-                            'status' => 'error',
-                            'message' => 'Gagal tap keluar'
-                        ], 500);
-                    }
-                } else {
-                    echo json_encode([
-                        'status' => 'error',
-                        'message' => 'Siswa tidak terdaftar'
-                    ], 500);
-                }
-            } else {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Device tidak terdaftar'
-                ], 500);
-            }
-        } else {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Salah parameter'
+                'ket' => 'Salah parameter'
             ], 500);
         }
     }

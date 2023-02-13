@@ -91,4 +91,21 @@ class DeviceController extends CI_Controller
             }
         }
     }
+
+    public function change($id)
+    {
+        $update = $this->Device->update(['status' => $this->input->get('status', true)], $id);
+
+        if ($update > 0) {
+            echo json_encode([
+                'status' => 'success',
+                'ket' => 'Status device berhasil diubah'
+            ], 200);
+        } else {
+            echo json_encode([
+                'status' => 'success',
+                'ket' => 'Status device gagal diubah'
+            ], 500);
+        }
+    }
 }

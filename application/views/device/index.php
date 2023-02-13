@@ -48,8 +48,7 @@
                                     <td><?= $dev->use_for ?></td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="status" <?= $dev->status == 1 ? 'checked' : '' ?>>
-                                            <!-- <label class="form-check-label" for="status"><?= $dev->status == 1 ? 'Aktif' : 'Nonaktif' ?></label> -->
+                                            <input class="form-check-input status" type="checkbox" id="<?= $dev->id_device ?>" <?= $dev->status == 1 ? 'checked' : '' ?>>
                                         </div>
                                     </td>
                                     <td>
@@ -67,3 +66,27 @@
 </div>
 
 <?php $this->load->view('layouts/footer'); ?>
+
+<script>
+    $("#data-table-default").on('click', '.status', function() {
+        let id = $(this).attr('id');
+        let status = 0;
+        if ($(this).is(":checked")) {
+            status = 1;
+        } else {
+            status = 0;
+        }
+
+        $.ajax({
+            url: '<?= base_url() ?>device/' + id,
+            type: "GET",
+            method: "GET",
+            data: {
+                status: status
+            },
+            success: function(response) {
+                console.log(response)
+            }
+        })
+    })
+</script>

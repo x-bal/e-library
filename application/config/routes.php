@@ -88,6 +88,7 @@ $route['buku/destroy/(:num)'] = 'BukuController/destroy/$1';
 $route['device'] = 'DeviceController/index';
 $route['device/create'] = 'DeviceController/create';
 $route['device/store'] = 'DeviceController/store';
+$route['device/(:num)'] = 'DeviceController/change/$1';
 $route['device/edit/(:num)'] = 'DeviceController/edit/$1';
 $route['device/update/(:num)'] = 'DeviceController/update/$1';
 $route['device/destroy/(:num)'] = 'DeviceController/destroy/$1';
@@ -106,5 +107,4 @@ $route['pinjaman/update/(:num)'] = 'PinjamanController/update/$1';
 $route['pinjaman/destroy/(:num)'] = 'PinjamanController/destroy/$1';
 
 $route['api/tap'] = 'ApiController/tap';
-$route['api/tap-in'] = 'ApiController/tapin';
-$route['api/tap-out'] = 'ApiController/tapout';
+$route['api/absensijson'] = 'ApiController/tapin';

@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 
 class Pinjaman extends CI_Model
 {
@@ -34,5 +35,17 @@ class Pinjaman extends CI_Model
     {
         $this->db->delete('pinjaman', ['id_pinjaman' => $id]);
         return $this->db->affected_rows();
+    }
+
+    public function pinjam()
+    {
+        $month = date('m');
+        return $this->db->query("SELECT * FROM pinjaman WHERE MONTH(tanggal_pinjam) = '$month' AND status='Dipinjam'")->result();
+    }
+
+    public function kembali()
+    {
+        $month = date('m');
+        return $this->db->query("SELECT * FROM pinjaman WHERE MONTH(tanggal_kembali) = '$month' AND status='Kembali'")->result();
     }
 }
