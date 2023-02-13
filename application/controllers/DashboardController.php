@@ -21,4 +21,11 @@ class DashboardController extends CI_Controller
 
         $this->load->view('dashboard/index', $data);
     }
+
+    public function config()
+    {
+        $data = ['secretKey' => $this->db->get_where('settings', ['name' => 'secret_key'])->row()->value];
+
+        $this->load->view('dashboard/config', $data);
+    }
 }

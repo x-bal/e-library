@@ -106,5 +106,7 @@ $route['pinjaman/kembali/(:num)'] = 'PinjamanController/kembali/$1';
 $route['pinjaman/update/(:num)'] = 'PinjamanController/update/$1';
 $route['pinjaman/destroy/(:num)'] = 'PinjamanController/destroy/$1';
 
+$route['config'] = 'DashboardController/config';
+
 $route['api/tap'] = 'ApiController/tap';
 $route['api/absensijson'] = 'ApiController/tapin';
