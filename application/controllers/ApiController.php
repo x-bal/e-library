@@ -15,7 +15,7 @@ class ApiController extends CI_Controller
     {
         $iddev = $this->input->post('id_device', true);
         $rfid = $this->input->post('rfid', true);
-        $secretkey = $this->input->post('secret_key', true);
+        $secretkey = $this->input->post('key', true);
 
         if (isset($secretkey) && isset($iddev) && isset($rfid)) {
             $key = $this->db->get_where('settings', ['name' => 'secret_key'])->row();
