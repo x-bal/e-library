@@ -13,9 +13,9 @@ class ApiController extends CI_Controller
 
     public function tapin()
     {
-        $iddev = $this->input->get('id_device', true);
-        $rfid = $this->input->get('rfid', true);
-        $secretkey = $this->input->get('secret_key', true);
+        $iddev = $this->input->post('id_device', true);
+        $rfid = $this->input->post('rfid', true);
+        $secretkey = $this->input->post('secret_key', true);
 
         if (isset($secretkey) && isset($iddev) && isset($rfid)) {
             $key = $this->db->get_where('settings', ['name' => 'secret_key'])->row();
