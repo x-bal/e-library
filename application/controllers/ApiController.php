@@ -42,6 +42,7 @@ class ApiController extends CI_Controller
                             if ($create > 0) {
                                 echo json_encode([
                                     'status' => 'success',
+                                    'type' => 'siswa',
                                     'ket' => 'Berhasil tap ' . strtolower($device->use_for),
                                     'siswa' => $siswa,
                                     'waktu' => date('Y-m-d H:i:s'),
