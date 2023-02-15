@@ -42,13 +42,10 @@
                             <?php foreach ($logs as $log) : ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $log->waktu ?></td>
-                                    <td><?= $log->nama_siswa ?></td>
+                                    <td><?= date('d/m/Y H:i:s', strtotime($log->waktu)) ?></td>
+                                    <td><?= $log->nama ?></td>
                                     <td><?= $log->nama_device ?></td>
-                                    <td><?= $log->ket ?></td>
-                                    <td>
-                                        <a href="<?= base_url('kategori/edit/' . $log->id_kategori) ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
-                                    </td>
+                                    <td><?= $log->keterangan ?></td>
                                 </tr>
                             <?php endforeach; ?>
 

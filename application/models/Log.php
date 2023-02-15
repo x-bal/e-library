@@ -9,6 +9,8 @@ class Log extends CI_Model
         $this->db->from('log_library');
         $this->db->join('students', 'students.id_student=log_library.siswa_id');
         $this->db->join('device_library', 'device_library.id_device=log_library.device_id');
+        $this->db->order_by('id_log', 'desc');
+        $this->db->limit(1000);
         return $this->db->get()->result();
     }
 
