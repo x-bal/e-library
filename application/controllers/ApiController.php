@@ -45,7 +45,7 @@ class ApiController extends CI_Controller
                                     'type' => 'siswa',
                                     'ket' => 'Berhasil tap ' . strtolower($device->use_for),
                                     'siswa' => $siswa,
-                                    'waktu' => date('Y-m-d H:i:s'),
+                                    'waktu' => date('H:i:s d/m/Y'),
                                 ], 200);
                             } else {
                                 echo json_encode([
