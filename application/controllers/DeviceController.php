@@ -22,6 +22,8 @@ class DeviceController extends CI_Controller
 
     public function create()
     {
+        isAdmin();
+
         $data = [
             'title' => 'Add Device',
             'action' => base_url('device/store'),
@@ -33,6 +35,8 @@ class DeviceController extends CI_Controller
 
     public function store()
     {
+        isAdmin();
+
         $this->form_validation->set_rules('nama_device', 'Nama device', 'required');
         $this->form_validation->set_rules('tempat', 'Tempat', 'required');
 
@@ -58,6 +62,8 @@ class DeviceController extends CI_Controller
 
     public function edit($id)
     {
+        isAdmin();
+
         $data = [
             'title' => 'Add Device',
             'action' => base_url('device/update/' . $id),
@@ -69,6 +75,8 @@ class DeviceController extends CI_Controller
 
     public function update($id)
     {
+        isAdmin();
+
         $this->form_validation->set_rules('nama_device', 'Nama device', 'required');
         $this->form_validation->set_rules('tempat', 'Tempat', 'required');
 
@@ -94,6 +102,8 @@ class DeviceController extends CI_Controller
 
     public function change($id)
     {
+        isAdmin();
+
         $update = $this->Device->update(['status' => $this->input->get('status', true)], $id);
 
         if ($update > 0) {

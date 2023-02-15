@@ -22,6 +22,8 @@ class KategoriController extends CI_Controller
 
     public function create()
     {
+        isAdmin();
+
         $data = [
             'title' => 'Add Kategori',
             'action' => base_url('kategori/store'),
@@ -33,6 +35,8 @@ class KategoriController extends CI_Controller
 
     public function store()
     {
+        isAdmin();
+
         $this->form_validation->set_rules('nama_kategori', 'Nama Kategori', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -54,6 +58,8 @@ class KategoriController extends CI_Controller
 
     public function edit($id)
     {
+        isAdmin();
+
         $data = [
             'title' => 'Add Kategori',
             'action' => base_url('kategori/update/' . $id),
@@ -65,6 +71,8 @@ class KategoriController extends CI_Controller
 
     public function update($id)
     {
+        isAdmin();
+
         $this->form_validation->set_rules('nama_kategori', 'Nama Kategori', 'required');
 
         if ($this->form_validation->run() == false) {

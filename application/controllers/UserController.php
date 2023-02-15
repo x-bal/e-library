@@ -22,6 +22,8 @@ class UserController extends CI_Controller
 
     public function create()
     {
+        isAdmin();
+
         $data = [
             'title' => 'Create User',
             'action' => base_url('users/store'),
@@ -33,6 +35,8 @@ class UserController extends CI_Controller
 
     public function store()
     {
+        isAdmin();
+
         $rules = [
             [
                 'field' => 'username',
@@ -91,6 +95,8 @@ class UserController extends CI_Controller
 
     public function edit($id)
     {
+        isAdmin();
+
         $data = [
             'title' => 'Edit User',
             'action' => base_url('users/update/' . $id),
@@ -102,6 +108,8 @@ class UserController extends CI_Controller
 
     public function update($id)
     {
+        isAdmin();
+
         $user = $this->User->find($id);
 
         if ($this->input->post('username', true) != $user->username) {
@@ -180,6 +188,8 @@ class UserController extends CI_Controller
 
     public function destroy($id)
     {
+        isAdmin();
+
         $user = $this->User->find($id);
 
         unlink('./uploads/users/' . $user->foto);

@@ -9,3 +9,13 @@ function auth()
         redirect(base_url());
     }
 }
+
+function isAdmin()
+{
+    $ci = get_instance();
+    $ci->load->library('session');
+
+    if ($ci->session->userdata('level') != 1) {
+        redirect('not-found');
+    }
+}

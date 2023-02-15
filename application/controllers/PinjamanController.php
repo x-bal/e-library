@@ -37,6 +37,8 @@ class PinjamanController extends CI_Controller
 
     public function create()
     {
+        isAdmin();
+
         $data = [
             'title' => 'Add Pinjaman',
             'action' => base_url('pinjaman/store'),
@@ -49,6 +51,8 @@ class PinjamanController extends CI_Controller
 
     public function store()
     {
+        isAdmin();
+
         $this->form_validation->set_rules('siswa', 'Siswa id', 'required');
         // $this->form_validation->set_rules('buku', 'Buku', 'required');
         // $this->form_validation->set_rules('jumlah', 'Jumlah pinjam', 'required');
@@ -84,6 +88,8 @@ class PinjamanController extends CI_Controller
 
     public function show($id)
     {
+        isAdmin();
+
         $pinjaman = $this->Pinjaman->find($id);
 
         echo json_encode($pinjaman);
@@ -91,6 +97,8 @@ class PinjamanController extends CI_Controller
 
     public function kembali($id)
     {
+        isAdmin();
+
         $data = [
             'kembali' => $this->input->post('kembali', true),
             'status' => $this->input->post('status', true),

@@ -23,6 +23,8 @@ class BukuController extends CI_Controller
 
     public function create()
     {
+        isAdmin();
+
         $data = [
             'title' => 'Add Buku',
             'action' => base_url('buku/store'),
@@ -35,6 +37,8 @@ class BukuController extends CI_Controller
 
     public function store()
     {
+        isAdmin();
+
         $this->form_validation->set_rules('nama_buku', 'Nama buku', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -60,6 +64,8 @@ class BukuController extends CI_Controller
 
     public function edit($id)
     {
+        isAdmin();
+
         $data = [
             'title' => 'Add Buku',
             'action' => base_url('buku/update/' . $id),
@@ -72,6 +78,8 @@ class BukuController extends CI_Controller
 
     public function update($id)
     {
+        isAdmin();
+
         $this->form_validation->set_rules('nama_buku', 'Nama buku', 'required');
 
         if ($this->form_validation->run() == false) {
