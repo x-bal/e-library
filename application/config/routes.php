@@ -110,3 +110,4 @@ $route['config'] = 'DashboardController/config';
 
 $route['api/tap'] = 'ApiController/tap';
 $route['api/absensijson'] = 'ApiController/tapin';
+$route['api/gettime'] = 'ApiController/getTime';

@@ -25,9 +25,26 @@
                 </div>
 
                 <div class="panel-body">
-                    <?php if ($this->uri->segment(1) == 'pinjaman') : ?>
-                        <a href="<?= base_url('pinjaman/create') ?>" class="mb-3 btn btn-primary"><i class="fas fa-plus-circle"></i> Add Pinjaman</a>
-                    <?php endif ?>
+                    <form action="" method="get" class="form-inline row mb-3">
+                        <div class="col-md-3 form-group">
+                            <label for="from">From</label>
+                            <input type="date" name="from" id="from" class="form-control">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label for="to">To</label>
+                            <input type="date" name="to" id="to" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 form-group mt-1">
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                            <?php if ($this->uri->segment(1) == 'pinjaman') : ?>
+                                <a href="<?= base_url('pinjaman/create') ?>" class="btn btn-primary mt-3"><i class="fas fa-plus-circle"></i> Add Pinjaman</a>
+                            <?php endif ?>
+
+                        </div>
+                    </form>
+
 
                     <table id="data-table-default" class="table table-striped table-bordered align-middle">
                         <thead>
