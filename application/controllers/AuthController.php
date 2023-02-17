@@ -41,7 +41,7 @@ class AuthController extends CI_Controller
                         'username' => $user->username,
                         'nama' => $user->nama,
                         'foto' => $user->foto,
-                        'level' => $user->role_id
+                        'level' => $user->id_role
                     ]);
 
                     redirect(base_url('dashboard'));
