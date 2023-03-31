@@ -46,11 +46,25 @@
                             <small class="text-danger"><?= form_error('kategori') ?></small>
                         </div>
 
-                        <div class="form-group mb-3">
+                        <!-- <div class="form-group mb-3">
                             <label for="jumlah">Jumlah Buku</label>
                             <input type="number" name="jumlah" id="jumlah" class="form-control" value="<?= $buku->tersedia ?? set_value('jumlah') ?>">
 
                             <small class="text-danger"><?= form_error('jumlah') ?></small>
+                        </div> -->
+
+                        <div class="form-group mb-3">
+                            <label for="no_rak">No Rak Buku</label>
+                            <input type="text" maxlength="10" name="no_rak" id="no_rak" class="form-control" value="<?= $buku->no_rak ?? set_value('no_rak') ?>">
+
+                            <small class="text-danger"><?= form_error('no_rak') ?></small>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="foto">Foto Buku</label>
+                            <input type="file" name="foto" id="foto" class="form-control" value="">
+
+                            <small class="text-danger"><?= form_error('foto') ?></small>
                         </div>
 
                         <div class="form-group mb-3">

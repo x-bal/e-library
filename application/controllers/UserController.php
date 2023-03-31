@@ -142,7 +142,7 @@ class UserController extends CI_Controller
 
             $this->load->library('upload', $config);
 
-            if (isset($_FILES['foto']['file_name'])) {
+            if (isset($_FILES['foto'])) {
                 if (!$this->upload->do_upload('foto')) {
                     $error = array('error' => $this->upload->display_errors());
 

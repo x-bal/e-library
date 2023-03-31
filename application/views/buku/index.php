@@ -31,22 +31,29 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th class="text-nowrap">Foto buku</th>
                                 <th class="text-nowrap">Nama buku</th>
                                 <th class="text-nowrap">Kategori</th>
-                                <th class="text-nowrap">Jumlah Buku</th>
+                                <th class="text-nowrap">No Rak</th>
+                                <!-- <th class="text-nowrap">Jumlah Buku</th> -->
                                 <th class="text-nowrap">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php foreach ($buku as $kat) : ?>
+                            <?php foreach ($buku as $buk) : ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $kat->nama_buku ?></td>
-                                    <td><?= $kat->nama_kategori ?></td>
-                                    <td><?= $kat->tersedia ?></td>
                                     <td>
-                                        <a href="<?= base_url('buku/edit/' . $kat->id_buku) ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
+                                        <img src="<?= base_url('uploads/buku/' . $buk->foto) ?>" alt="" width="70">
+
+                                    </td>
+                                    <td><?= $buk->nama_buku ?></td>
+                                    <td><?= $buk->nama_kategori ?></td>
+                                    <td><?= $buk->no_rak ?></td>
+                                    <!-- <td><?= $buk->tersedia ?></td> -->
+                                    <td>
+                                        <a href="<?= base_url('buku/edit/' . $buk->id_buku) ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

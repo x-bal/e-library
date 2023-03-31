@@ -40,24 +40,43 @@ class BukuController extends CI_Controller
         isAdmin();
 
         $this->form_validation->set_rules('nama_buku', 'Nama buku', 'required');
+        $this->form_validation->set_rules('no_rak', 'No Rak', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->create();
         } else {
-            $data = [
-                'nama_buku' => $this->input->post('nama_buku', true),
-                'kategori_id' => $this->input->post('kategori', true),
-                'tersedia' => $this->input->post('jumlah', true),
-            ];
+            $config['upload_path']          = './uploads/buku/';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['file_name']            = date('dmYHis') . '-' . str_replace(' ', '-', $this->input->post('nama_buku', true));
 
-            $create = $this->Buku->create($data);
+            $this->load->library('upload', $config);
 
-            if ($create > 0) {
-                $this->session->set_flashdata('success', 'buku berhasil ditambahkan');
-                redirect(base_url('buku'));
+            if (!$this->upload->do_upload('foto')) {
+                $error = array('error' => $this->upload->display_errors());
+
+                var_dump($error);
+                die;
+                $this->create($error);
             } else {
-                $this->session->set_flashdata('error', 'buku gagal ditambahkan');
-                redirect(base_url('buku'));
+                $foto = $this->upload->data();
+
+                $data = [
+                    'nama_buku' => $this->input->post('nama_buku', true),
+                    'kategori_id' => $this->input->post('kategori', true),
+                    // 'tersedia' => $this->input->post('jumlah', true),
+                    'no_rak' => $this->input->post('no_rak', true),
+                    'foto' => $foto['file_name']
+                ];
+
+                $create = $this->Buku->create($data);
+
+                if ($create > 0) {
+                    $this->session->set_flashdata('success', 'Buku berhasil ditambahkan');
+                    redirect(base_url('buku'));
+                } else {
+                    $this->session->set_flashdata('error', 'Buku gagal ditambahkan');
+                    redirect(base_url('buku'));
+                }
             }
         }
     }
@@ -85,19 +104,46 @@ class BukuController extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->update();
         } else {
+            $config['upload_path']          = './uploads/buku/';
+            $config['allowed_types']        = 'gif|jpg|png';
+            $config['file_name']            = date('dmYHis') . '-' . str_replace(' ', '-', $this->input->post('nama_buku', true));
+
+            $this->load->library('upload', $config);
+
+            $buku = $this->Buku->find($id);
+
+            if (isset($_FILES['foto'])) {
+                if (!$this->upload->do_upload('foto')) {
+                    $error = array('error' => $this->upload->display_errors());
+
+                    var_dump($error);
+                    die;
+                } else {
+
+                    unlink('./uploads/buku/' . $buku->foto);
+
+                    $foto =  $this->upload->data();
+                    $fotoBuku = $foto['file_name'];
+                }
+            } else {
+                $fotoBuku = $buku->foto;
+            }
+
             $data = [
                 'nama_buku' => $this->input->post('nama_buku', true),
                 'kategori_id' => $this->input->post('kategori', true),
-                'tersedia' => $this->input->post('jumlah', true),
+                // 'tersedia' => $this->input->post('jumlah', true),
+                'no_rak' => $this->input->post('no_rak', true),
+                'foto' => $fotoBuku
             ];
 
             $update = $this->Buku->update($data, $id);
 
             if ($update > 0) {
-                $this->session->set_flashdata('success', 'buku berhasil ditambahkan');
+                $this->session->set_flashdata('success', 'Buku berhasil ditambahkan');
                 redirect(base_url('buku'));
             } else {
-                $this->session->set_flashdata('error', 'buku gagal ditambahkan');
+                $this->session->set_flashdata('error', 'Buku gagal ditambahkan');
                 redirect(base_url('buku'));
             }
         }

@@ -74,12 +74,13 @@
                                 <small class="text-danger mt-3"><?= form_error('username') ?></small>
                             <?php endif; ?>
                         </div>
-                        <!-- <div class="form-check mb-30px">
-                            <input class="form-check-input" type="checkbox" value="1" id="rememberMe" />
-                            <label class="form-check-label" for="rememberMe">
-                                Remember Me
-                            </label>
-                        </div> -->
+
+                        <div class="form-floating text-center mb-15px">
+                            <?php if ($this->session->flashdata('error')) : ?>
+                                <small class="text-danger mt-3 mb-3"><?= $this->session->flashdata('error') ?></small>
+                            <?php endif; ?>
+                        </div>
+
                         <div class="mb-15px">
                             <button type="submit" class="btn btn-success d-block h-45px w-100 btn-lg fs-14px">Sign me in</button>
                         </div>
