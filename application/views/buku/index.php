@@ -35,7 +35,7 @@
                                 <th class="text-nowrap">Nama buku</th>
                                 <th class="text-nowrap">Kategori</th>
                                 <th class="text-nowrap">No Rak</th>
-                                <!-- <th class="text-nowrap">Jumlah Buku</th> -->
+                                <th class="text-nowrap">Jumlah Buku</th>
                                 <th class="text-nowrap">Action</th>
                             </tr>
                         </thead>
@@ -51,7 +51,7 @@
                                     <td><?= $buk->nama_buku ?></td>
                                     <td><?= $buk->nama_kategori ?></td>
                                     <td><?= $buk->no_rak ?></td>
-                                    <!-- <td><?= $buk->tersedia ?></td> -->
+                                    <td><?= $buk->tersedia ?></td>
                                     <td>
                                         <a href="<?= base_url('buku/edit/' . $buk->id_buku) ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
                                     </td>

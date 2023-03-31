@@ -46,12 +46,12 @@
                             <small class="text-danger"><?= form_error('kategori') ?></small>
                         </div>
 
-                        <!-- <div class="form-group mb-3">
+                        <div class="form-group mb-3">
                             <label for="jumlah">Jumlah Buku</label>
                             <input type="number" name="jumlah" id="jumlah" class="form-control" value="<?= $buku->tersedia ?? set_value('jumlah') ?>">
 
                             <small class="text-danger"><?= form_error('jumlah') ?></small>
-                        </div> -->
+                        </div>
 
                         <div class="form-group mb-3">
                             <label for="no_rak">No Rak Buku</label>

@@ -63,7 +63,7 @@ class BukuController extends CI_Controller
                 $data = [
                     'nama_buku' => $this->input->post('nama_buku', true),
                     'kategori_id' => $this->input->post('kategori', true),
-                    // 'tersedia' => $this->input->post('jumlah', true),
+                    'tersedia' => $this->input->post('jumlah', true),
                     'no_rak' => $this->input->post('no_rak', true),
                     'foto' => $foto['file_name']
                 ];
@@ -132,7 +132,7 @@ class BukuController extends CI_Controller
             $data = [
                 'nama_buku' => $this->input->post('nama_buku', true),
                 'kategori_id' => $this->input->post('kategori', true),
-                // 'tersedia' => $this->input->post('jumlah', true),
+                'tersedia' => $this->input->post('jumlah', true),
                 'no_rak' => $this->input->post('no_rak', true),
                 'foto' => $fotoBuku
             ];
